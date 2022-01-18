@@ -1,0 +1,25 @@
+[
+    {
+        "key":"name",
+        "data_list":[
+            {
+                "question":"what is your name",
+                "answer":"my name is fares"    
+            },{
+                "question":"what is your father name",
+                "answer":"my father name is raed"    
+            }
+        ]
+    },{
+        "key":"nationality",
+        "data_list":[
+            {
+                "question":"what is your nationality",
+                "answer":"I'm from jordan"    
+            },{
+                "question":"what is your favourite nationality",
+                "answer":"my favourite nationality is palestinian"    
+            }
+        ]
+    }
+]
