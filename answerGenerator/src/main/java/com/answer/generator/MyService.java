@@ -28,12 +28,12 @@ public class MyService {
 
 	public String getAnswer(String question) {
 		int i;
-		for (i = 0; i < keywordStrings.size(); i++) {
+		for (i = 0; i < this.keywordStrings.size(); i++) {
 			if (question.contains(keywordStrings.get(i))) {
 				break;
 			}
 		}
-		return data.get(keywordStrings.get(i)).getAnswerFor(question);
+		return data.get(this.keywordStrings.get(i)).getAnswerFor(question);
 	}
 
 	public void readData() {
