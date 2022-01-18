@@ -20,6 +20,7 @@ import com.answer.generator.modal.SuperContainer;
 public class MyService {
 
 	private HashMap<String, MapContainer> data = new HashMap<>();
+	private List<String> keywordStrings = Arrays.asList("name", "nationality");
 
 	public MyService() {
 		readData();
