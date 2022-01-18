@@ -26,7 +26,13 @@ public class MyService {
 	}
 
 	public String getAnswer(String question) {
-		return data.get("name").getAnswerFor(question);
+		int i;
+		for (i = 0; i < keywordStrings.size(); i++) {
+			if (question.contains(keywordStrings.get(i))) {
+				break;
+			}
+		}
+		return data.get(keywordStrings.get(i)).getAnswerFor(question);
 	}
 
 	public void readData() {
