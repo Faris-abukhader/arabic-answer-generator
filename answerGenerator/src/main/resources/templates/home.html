@@ -120,7 +120,7 @@
       function getAnswer(){
 	console.log("text fieldd"+textField.value)
           var xhr = new XMLHttpRequest();
-          var url = 'https://arabic-answer-generator.herokuapp.com/'+textField.value;
+          var url = 'https://arabic-answer-generator.herokuapp.com/get-answer/'+textField.value;
           xhr.open('GET', url, true);
           xhr.onload = function() {
               if (xhr.status == 200) {
