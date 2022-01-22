@@ -9,6 +9,15 @@ public class SuperContainer {
 
 	private String question;
 	private String answer;
+	private String arabicAnswer;
+
+	public String getArabicAnswer() {
+		return arabicAnswer;
+	}
+
+	public void setArabicAnswer(String arabicAnswer) {
+		this.arabicAnswer = arabicAnswer;
+	}
 
 	public String getQuestion() {
 		return question;
@@ -22,9 +31,10 @@ public class SuperContainer {
 		this.answer = answer;
 	}
 
-	public SuperContainer(String qustion, String answer) {
+	public SuperContainer(String qustion, String answer, String arabicAnswer) {
 		this.question = qustion;
 		this.answer = answer;
+		this.arabicAnswer = arabicAnswer;
 	}
 
 	public SuperContainer() {
@@ -53,8 +63,9 @@ public class SuperContainer {
 		return new ArrayList<>(new HashSet<>(list));
 	}
 
-	String getAnswer() {
-		return this.answer;
+	FinalAnswer getAnswer() {
+		FinalAnswer answers = new FinalAnswer(question, answer, arabicAnswer);
+		return answers;
 	}
 
 }

@@ -14,6 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
+import com.answer.generator.modal.FinalAnswer;
 import com.answer.generator.modal.MapContainer;
 import com.answer.generator.modal.SuperContainer;
 
@@ -21,13 +22,13 @@ import com.answer.generator.modal.SuperContainer;
 public class MyService {
 
 	private HashMap<String, MapContainer> data = new HashMap<>();
-	private List<String> keywordStrings = Arrays.asList("name", "nationality");
+	private List<String> keywordStrings = Arrays.asList("how", "why", "which", "can", "do", "where", "what");
 
 	public MyService() {
 		readData();
 	}
 
-	public String getAnswer(String question) {
+	public FinalAnswer getAnswer(String question) {
 		int i;
 		for (i = 0; i < this.keywordStrings.size(); i++) {
 			if (question.contains(keywordStrings.get(i))) {
@@ -41,7 +42,7 @@ public class MyService {
 		JSONParser parser = new JSONParser();
 		JSONArray a;
 		try {
-			a = (JSONArray) parser.parse(new FileReader("src/main/resources/static/test.json"));
+			a = (JSONArray) parser.parse(new FileReader("src/main/resources/static/mutualQuestion1.json"));
 			for (Object o : a) {
 				JSONObject person = (JSONObject) o;
 
@@ -55,7 +56,8 @@ public class MyService {
 					JSONObject container = (JSONObject) object;
 					String question = (String) container.get("question");
 					String answer = (String) container.get("answer");
-					superContainer.add(new SuperContainer(question, answer));
+					String arabicAnswer = (String) container.get("arabic_answer");
+					superContainer.add(new SuperContainer(question, answer, arabicAnswer));
 				}
 
 				MapContainer map1 = new MapContainer(superContainer);

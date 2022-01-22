@@ -69,10 +69,15 @@
               autofocus
             />
           </div>
+          
+          
+          <div style="color:darkgrey;display:none" id="orgin-question-container"class="mb-1">
+          <span>Closet question : </span><span id="orgin-question"></span>
+          </div>
 
           <div class="mb-1">
             <div class="d-flex justify-content-between">
-              <label class="form-label" for="login-password">Output :</label>
+              <label class="form-label" for="login-password">Output (English) :</label>
             </div>
             <div class="input-group input-group-merge form-password-toggle">
               <textarea              
@@ -81,6 +86,21 @@
               name="output-textField"
               placeholder="your answer will be shown here"
               aria-describedby="output-textField"
+              tabindex="1"
+              editable=false>
+              </textarea>
+            </div>
+          </div>
+           <div class="mb-1">
+            <div class="d-flex justify-content-between">
+              <label class="form-label" for="login-password">Output (Arabic) :</label>
+            </div>
+            <div class="input-group input-group-merge form-password-toggle" style="text-align:right">
+              <textarea              
+              class="form-control"
+              id="text-area-arabic"
+              name="output-textField"
+              placeholder="your arabic answer will be shown here"
               tabindex="1"
               editable=false>
               </textarea>
@@ -113,20 +133,30 @@
 
     <script>
 
+      const orginQuestion = document.getElementById("orgin-question");
       const textArea = document.getElementById("text-area")
+      const textAreaArabic = document.getElementById("text-area-arabic")
       const textField = document.getElementById("input-textField")
       const submitButton = document.getElementById("getAnswerButton")
-
+      
+      
       function getAnswer(){
 	console.log("text fieldd"+textField.value)
           var xhr = new XMLHttpRequest();
-          var url = 'https://arabic-answer-generator.herokuapp.com/'+textField.value;
+          var url = 'https://arabic-answer-generator.herokuapp.com/get-answer/'+textField.value;
+         // var url = 'http://localhost:8080/get-answer/'+textField.value;
           xhr.open('GET', url, true);
           xhr.onload = function() {
               if (xhr.status == 200) {
-                  var answer = this.responseText;
-                  textArea.value = answer
-              }
+	            var answer = this.responseText;
+	            var answerObj = JSON.parse(answer);
+                textArea.value = answerObj.englishAnswer;
+                textAreaArabic.value = answerObj.arabicAnswer;
+               orginQuestion.innerText = answerObj.question
+               document.getElementById("orgin-question-container").style.display = "block";
+
+      }
+
       
           }
           xhr.send();
@@ -134,6 +164,9 @@
       
       function resetInput(){
         textArea.value = ""
+        textAreaArabic.value = ""
+        textField.value = ""
+        document.getElementById("orgin-question-container").style.display = "none";
       }
       
      textField.onkeyup = function() {
