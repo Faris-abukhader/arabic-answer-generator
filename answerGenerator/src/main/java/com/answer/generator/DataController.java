@@ -21,7 +21,7 @@ public class DataController {
 	@GetMapping("{question}")
 	public FinalAnswer getAnswer(@PathVariable("question") String question) {
 		log.info("the question is " + question);
-		return myService.getAnswer(question);
+		return myService.getAnswer(question.toLowerCase());
 	}
 
 }
